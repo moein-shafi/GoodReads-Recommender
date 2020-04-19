@@ -10,6 +10,7 @@ Book::Book(int id,
            string author_name,
            float author_average_rating):
                     id(id),
+                    title(title),
                     genre_1(genre_1),
                     genre_2(genre_2),
                     pages(pages),
