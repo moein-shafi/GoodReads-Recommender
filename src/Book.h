@@ -1,3 +1,6 @@
+#ifndef _BOOK_H_
+#define _BOOK_H_
+
 #include <string>
 
 using namespace std;
@@ -25,3 +28,5 @@ class Book
         int total_book_review;
         float popularity;
 };
+
+#endif
