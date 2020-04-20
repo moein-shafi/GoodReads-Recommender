@@ -10,7 +10,7 @@ using namespace std;
 #define BOOKS "../datasets/books.csv"
 #define REVIEWS "../datasets/reviews.csv"
 
-void add_book(vector<Book> &books, vector<string> fields)
+void add_book(vector<Book> &books, vector<string> &fields)
 {
     int index = 0;
     int first = 0;
@@ -123,6 +123,18 @@ void add_review(vector<Book> &books, vector<string> &review)
     books[book_index].increase_rating_like(result);
 }
 
+void book_extraction(vector<Book> &books, vector<vector<string> > &books_lines)
+{
+    for (auto book : books_lines)
+        add_book(books, book);
+}
+
+void review_extraction(vector<Book> &books, vector<vector<string> > &reviews_lines)
+{
+    for (auto review : reviews_lines)
+        add_review(books, review);
+}
+
 int main(int argc, char* argv[])
 {
     string genre = argv[0];
@@ -131,12 +143,10 @@ int main(int argc, char* argv[])
     vector<vector<string> > reviews_lines;
 
     read_file(books_lines, BOOKS);
-    for (auto book : books_lines)
-        add_book(books, book);
-
     read_file(reviews_lines, REVIEWS);
-    for (auto review : reviews_lines)
-        add_review(books, review);
+
+    book_extraction(books, books_lines);
+    review_extraction(books, reviews_lines);
 
     /// TODO: calculate_pupolarity for each book
     /// TODO: find_result
