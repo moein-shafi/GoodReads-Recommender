@@ -135,6 +135,13 @@ void review_extraction(vector<Book> &books, vector<vector<string> > &reviews_lin
         add_review(books, review);
 }
 
+void calculate_pupolarity(vector<Book> &books)
+{
+    for (auto book : books)
+        book.calculate_pupolarity();
+}
+
+
 int main(int argc, char* argv[])
 {
     string genre = argv[0];
@@ -147,8 +154,8 @@ int main(int argc, char* argv[])
 
     book_extraction(books, books_lines);
     review_extraction(books, reviews_lines);
+    calculate_pupolarity(books);
 
-    /// TODO: calculate_pupolarity for each book
     /// TODO: find_result
     /// TODO: show_result
 

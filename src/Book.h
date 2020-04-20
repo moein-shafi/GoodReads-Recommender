@@ -18,6 +18,7 @@ class Book
         int get_id();
         void increase_review_number(int value=1);
         void increase_rating_like(int value);
+        void calculate_pupolarity();
 
     private:
         int id;
@@ -27,7 +28,7 @@ class Book
         int pages;
         string author_name;
         float author_average_rating;
-        float sum_of_rating_like;
+        int sum_of_rating_like;
         int total_book_review;
         float popularity;
 };

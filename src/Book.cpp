@@ -36,3 +36,10 @@ void Book::increase_rating_like(int value)
 {
     this->sum_of_rating_like += value;;
 }
+
+void Book::calculate_pupolarity()
+{
+    float review_grade = sum_of_rating_like / total_book_review;
+    float grade = author_average_rating + review_grade;
+    this->popularity = 0.1 * grade;
+}
