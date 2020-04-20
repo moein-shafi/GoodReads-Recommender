@@ -15,6 +15,7 @@ class Book
              int pages,
              string author_name,
              float author_average_rating);
+        int get_id();
 
     private:
         int id;

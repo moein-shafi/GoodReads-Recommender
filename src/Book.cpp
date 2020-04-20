@@ -21,3 +21,8 @@ Book::Book(int id,
     this->total_book_review = 0;
     this->popularity = 0;
 }
+
+int Book::get_id()
+{
+    return this->id;
+}

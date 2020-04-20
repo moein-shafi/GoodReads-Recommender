@@ -10,6 +10,22 @@ using namespace std;
 #define BOOKS "../datasets/books.csv"
 #define REVIEWS "../datasets/reviews.csv"
 
+void add_book(vector<Book> &books, vector<string> fields)
+{
+    int index = 0;
+    for (index = 0; index < books.size(); index++)
+    {
+        if (books[index].get_id() >= atoi(fields[0].c_str()))
+            break;
+    }
+    books.insert(books.begin() + index,
+                Book(atoi(fields[0].c_str()),
+                            fields[1], fields[2], fields[3],
+                            atoi(fields[4].c_str()),
+                            fields[5],
+                            stof(fields[6])));
+}
+
 void read_books(vector<Book> &books)
 {
     string line, field;
@@ -26,11 +42,7 @@ void read_books(vector<Book> &books)
         while(getline(ss, field, ','))
             fields.push_back(field);
 
-        books.push_back(Book(atoi(fields[0].c_str()),
-                                 fields[1], fields[2], fields[3],
-                                 atoi(fields[4].c_str()),
-                                 fields[5],
-                                 stof(fields[6])));
+        add_book(books, fields);
         fields.clear();
     }
     myFile.close();
