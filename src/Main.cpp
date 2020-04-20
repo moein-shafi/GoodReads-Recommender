@@ -75,11 +75,11 @@ void add_book(vector<Book> &books, vector<string> fields)
     }
 }
 
-void read_books(vector<Book> &books)
+void read_file(vector<vector<string> > &lines, string file_name)
 {
     string line, field;
     vector<string> fields;
-    fstream myFile(BOOKS);
+    fstream myFile(file_name.c_str());
 
     if (!myFile.is_open())
         throw std::runtime_error("Could not open file");
@@ -91,7 +91,7 @@ void read_books(vector<Book> &books)
         while(getline(ss, field, ','))
             fields.push_back(field);
 
-        add_book(books, fields);
+        lines.push_back(fields);
         fields.clear();
     }
     myFile.close();
@@ -101,7 +101,12 @@ int main(int argc, char* argv[])
 {
     string genre = argv[0];
     vector<Book> books;
-    read_books(books);
+    vector<vector<string> > books_lines;
+    vector<vector<string> > reviews_lines;
+
+    read_file(books_lines, BOOKS);
+    for (auto book : books_lines)
+        add_book(books, book);
 
     /// TODO: add_review for each book
     /// TODO: calculate_pupolarity for each book
