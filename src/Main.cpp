@@ -97,6 +97,32 @@ void read_file(vector<vector<string> > &lines, string file_name)
     myFile.close();
 }
 
+int search_book(vector<Book> &books, int low, int high, int target_id)
+{
+	int mid = (low + high) / 2; /*low + (high - low)/2;*/
+	if (high < low)
+		return -1;
+
+	if (target_id == books[mid].get_id())
+		return mid;
+
+	if (target_id > books[mid].get_id())
+		return search_book(books, (mid + 1), high, target_id);
+
+	return search_book(books, low, (mid - 1), target_id);
+}
+
+void add_review(vector<Book> &books, vector<string> &review)
+{
+    int id = atoi(review[0].c_str());
+    int rating = atoi(review[1].c_str());
+    int number_of_likes = atoi(review[2].c_str());
+    int result = rating * number_of_likes;
+    int book_index = search_book(books, 0, books.size(), id);
+    books[book_index].increase_review_number();
+    books[book_index].increase_rating_like(result);
+}
+
 int main(int argc, char* argv[])
 {
     string genre = argv[0];
@@ -108,7 +134,10 @@ int main(int argc, char* argv[])
     for (auto book : books_lines)
         add_book(books, book);
 
-    /// TODO: add_review for each book
+    read_file(reviews_lines, REVIEWS);
+    for (auto review : reviews_lines)
+        add_review(books, review);
+
     /// TODO: calculate_pupolarity for each book
     /// TODO: find_result
     /// TODO: show_result

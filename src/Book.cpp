@@ -26,3 +26,13 @@ int Book::get_id()
 {
     return this->id;
 }
+
+void Book::increase_review_number(int value)
+{
+    this->total_book_review += value;;
+}
+
+void Book::increase_rating_like(int value)
+{
+    this->sum_of_rating_like += value;;
+}
