@@ -13,17 +13,66 @@ using namespace std;
 void add_book(vector<Book> &books, vector<string> fields)
 {
     int index = 0;
-    for (index = 0; index < books.size(); index++)
+    int first = 0;
+    int last = books.size() - 1;
+
+    if (books.size() < 1)
     {
-        if (books[index].get_id() >= atoi(fields[0].c_str()))
-            break;
-    }
-    books.insert(books.begin() + index,
-                Book(atoi(fields[0].c_str()),
+         books.push_back(Book(atoi(fields[0].c_str()),
                             fields[1], fields[2], fields[3],
                             atoi(fields[4].c_str()),
                             fields[5],
                             stof(fields[6])));
+        return;
+    }
+    if (books[last].get_id() <= atoi(fields[0].c_str()))
+    {
+         books.push_back(Book(atoi(fields[0].c_str()),
+                            fields[1], fields[2], fields[3],
+                            atoi(fields[4].c_str()),
+                            fields[5],
+                            stof(fields[6])));
+        return;
+    }
+    if (books[first].get_id() >= atoi(fields[0].c_str()))
+    {
+         books.insert(books.begin(),
+                     Book(atoi(fields[0].c_str()),
+                            fields[1], fields[2], fields[3],
+                            atoi(fields[4].c_str()),
+                            fields[5],
+                            stof(fields[6])));
+        return;
+    }
+
+    while (first + 1 < last)
+    {
+        index = (last - first) / 2;
+        index += first;
+        if (books[index].get_id() >= atoi(fields[0].c_str()))
+            last = index;
+        else
+            first = index;
+    }
+    if (books[index].get_id() >= atoi(fields[0].c_str()))
+    {
+        books.insert(books.begin() + index,
+                 Book(atoi(fields[0].c_str()),
+                        fields[1], fields[2], fields[3],
+                        atoi(fields[4].c_str()),
+                        fields[5],
+                        stof(fields[6])));
+    }
+
+    else
+    {
+        books.insert(books.begin() + index + 1,
+                 Book(atoi(fields[0].c_str()),
+                        fields[1], fields[2], fields[3],
+                        atoi(fields[4].c_str()),
+                        fields[5],
+                        stof(fields[6])));
+    }
 }
 
 void read_books(vector<Book> &books)
