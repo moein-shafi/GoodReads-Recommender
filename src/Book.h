@@ -1,6 +1,8 @@
 #ifndef _BOOK_H_
 #define _BOOK_H_
 
+#include <iomanip>
+#include <iostream>
 #include <string>
 
 using namespace std;
@@ -19,7 +21,8 @@ class Book
         float get_popularity();
         void increase_review_number(int value=1);
         void increase_rating_like(int value);
-        void calculate_pupolarity();
+        void calculate_popularity();
+        void show();
 
     private:
         int id;

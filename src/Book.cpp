@@ -42,9 +42,25 @@ void Book::increase_rating_like(int value)
     this->sum_of_rating_like += value;;
 }
 
-void Book::calculate_pupolarity()
+void Book::calculate_popularity()
 {
-    float review_grade = sum_of_rating_like / total_book_review;
+    float review_grade;
+
+    if (total_book_review < 1)
+        review_grade = 0;
+    else
+        review_grade = sum_of_rating_like / total_book_review;
+
     float grade = author_average_rating + review_grade;
     this->popularity = 0.1 * grade;
+}
+
+void Book::show()
+{
+    cout << "id: " << this->id << endl;
+    cout << "Title: " << this->title << endl;
+    cout << "Genres: " << this->genre_1 << ", " << this->genre_2 << endl;
+    cout << "Number of Pages: " << this->pages << endl;
+    cout << "Author: " << this->author_name << endl;
+    cout << "Average Rating: " << std::fixed << std::setprecision(2) << this->popularity << endl;
 }

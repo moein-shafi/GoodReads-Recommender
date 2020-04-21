@@ -135,10 +135,10 @@ void review_extraction(vector<Book> &books, vector<vector<string> > &reviews_lin
         add_review(books, review);
 }
 
-void calculate_pupolarity(vector<Book> &books)
+void calculate_popularity(vector<Book> &books)
 {
-    for (auto book : books)
-        book.calculate_pupolarity();
+    for (int i = 0; i < books.size(); i++)
+        books[i].calculate_popularity();
 }
 
 int find_result(vector<Book> &books)
@@ -161,13 +161,10 @@ int main(int argc, char* argv[])
 
     read_file(books_lines, BOOKS);
     read_file(reviews_lines, REVIEWS);
-
     book_extraction(books, books_lines);
     review_extraction(books, reviews_lines);
-    calculate_pupolarity(books);
+    calculate_popularity(books);
     int book_index = find_result(books);
-
-    /// TODO: show_result
-
+    books[book_index].show();
     exit(EXIT_SUCCESS);
 }
