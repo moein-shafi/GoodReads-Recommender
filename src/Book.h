@@ -23,6 +23,7 @@ class Book
         void increase_rating_like(int value);
         void calculate_popularity();
         void show();
+        int have_genre(string genre);
 
     private:
         int id;

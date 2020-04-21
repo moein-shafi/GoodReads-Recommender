@@ -141,20 +141,30 @@ void calculate_popularity(vector<Book> &books)
         books[i].calculate_popularity();
 }
 
-int find_result(vector<Book> &books)
+int find_result(vector<Book> &books, string &genre)
 {
     int index = 0;
+    int initialize = 1;
     for (int i = 1; i < books.size(); i++)
     {
-        if (books[i].get_popularity() > books[index].get_popularity())
-            index = i;
+        if (books[i].have_genre(genre) == 1)
+        {
+            if (initialize == 1)
+            {
+                index = i;
+                initialize = 0;
+            }
+
+            if (books[i].get_popularity() > books[index].get_popularity())
+                index = i;
+        }
     }
     return index;
 }
 
 int main(int argc, char* argv[])
 {
-    string genre = argv[0];
+    string genre = argv[1];
     vector<Book> books;
     vector<vector<string> > books_lines;
     vector<vector<string> > reviews_lines;
@@ -164,7 +174,7 @@ int main(int argc, char* argv[])
     book_extraction(books, books_lines);
     review_extraction(books, reviews_lines);
     calculate_popularity(books);
-    int book_index = find_result(books);
+    int book_index = find_result(books, genre);
     books[book_index].show();
     exit(EXIT_SUCCESS);
 }

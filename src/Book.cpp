@@ -55,6 +55,13 @@ void Book::calculate_popularity()
     this->popularity = 0.1 * grade;
 }
 
+int Book::have_genre(string genre)
+{
+    if (this->genre_1 == genre || this->genre_2 == genre)
+        return 1;
+    return 0;
+}
+
 void Book::show()
 {
     cout << "id: " << this->id << endl;
