@@ -16,6 +16,7 @@ class Book
              string author_name,
              float author_average_rating);
         int get_id();
+        float get_popularity();
         void increase_review_number(int value=1);
         void increase_rating_like(int value);
         void calculate_pupolarity();

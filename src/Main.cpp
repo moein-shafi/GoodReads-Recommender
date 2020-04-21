@@ -141,6 +141,16 @@ void calculate_pupolarity(vector<Book> &books)
         book.calculate_pupolarity();
 }
 
+int find_result(vector<Book> &books)
+{
+    int index = 0;
+    for (int i = 1; i < books.size(); i++)
+    {
+        if (books[i].get_popularity() > books[index].get_popularity())
+            index = i;
+    }
+    return index;
+}
 
 int main(int argc, char* argv[])
 {
@@ -155,8 +165,8 @@ int main(int argc, char* argv[])
     book_extraction(books, books_lines);
     review_extraction(books, reviews_lines);
     calculate_pupolarity(books);
+    int book_index = find_result(books);
 
-    /// TODO: find_result
     /// TODO: show_result
 
     exit(EXIT_SUCCESS);

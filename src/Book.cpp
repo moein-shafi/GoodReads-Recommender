@@ -27,6 +27,11 @@ int Book::get_id()
     return this->id;
 }
 
+float Book::get_popularity()
+{
+    return this->popularity;
+}
+
 void Book::increase_review_number(int value)
 {
     this->total_book_review += value;;
